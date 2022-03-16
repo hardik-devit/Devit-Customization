@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include devit_customization *.css
+recursive-include devit_customization *.csv
+recursive-include devit_customization *.html
+recursive-include devit_customization *.ico
+recursive-include devit_customization *.js
+recursive-include devit_customization *.json
+recursive-include devit_customization *.md
+recursive-include devit_customization *.png
+recursive-include devit_customization *.py
+recursive-include devit_customization *.svg
+recursive-include devit_customization *.txt
+recursive-exclude devit_customization *.pyc
