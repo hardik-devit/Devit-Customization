@@ -109,8 +109,20 @@ app_license = "MIT"
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
-#	}
+# 	}
 # }
+doctype_js = {"Role" : "public/js/role.js"}
+
+# will be executed after successfully installing this app
+after_install = "devit_customization.install.after_install"
+
+doc_events = {
+	"Item": {
+		"validate": "devit_customization.utils.validate_item",
+		# "on_cancel": "method",
+		# "on_trash": "method"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
