@@ -2,6 +2,9 @@ import frappe
 from erpnext.stock.doctype.item.item import (Item)
 
 class ItemInherit(Item):
+    """
+    -> Please check this method is not working
+    """
     @frappe.whitelist()
     def get_unique_value_for_item_code(self):
         count_of_items = frappe.db.count('Item')

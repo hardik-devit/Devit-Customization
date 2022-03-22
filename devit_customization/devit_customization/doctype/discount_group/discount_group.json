@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:article_discount_english",
+ "creation": "2022-03-21 20:12:32.999879",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "article_discount_english",
+  "article_discount_german",
+  "article_discount_italian"
+ ],
+ "fields": [
+  {
+   "fieldname": "article_discount_english",
+   "fieldtype": "Data",
+   "label": "Article Discount English",
+   "unique": 1
+  },
+  {
+   "fieldname": "article_discount_german",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Article Discount German",
+   "reqd": 1
+  },
+  {
+   "fieldname": "article_discount_italian",
+   "fieldtype": "Data",
+   "label": "Article Discount Italian"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-21 20:12:32.999879",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Discount Group",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

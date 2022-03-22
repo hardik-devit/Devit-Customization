@@ -7,9 +7,10 @@ def validate_item(doc, method=None):
         frappe.throw(_("CWG Field should be Unique for all records..!!"))
 
 
-from erpnext.stock.doctype.item.item import (Item)
+@frappe.whitelist()
+def get_user_groups_doctype():
+    group_list = [d.name for d in frappe.db.get_all("User Group")]
+    doctype_list = [d.name for d in frappe.db.get_all("DocType")]
+    return group_list, doctype_list
 
-class ItemInherit(Item):
-    def get_unique_value_for_item_code(self):
-        count_of_items = frappe.db.count('Item')
-        return count_of_items+1
+

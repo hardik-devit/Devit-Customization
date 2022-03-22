@@ -119,8 +119,6 @@ after_install = "devit_customization.install.after_install"
 doc_events = {
 	"Item": {
 		"validate": "devit_customization.utils.validate_item",
-		# "on_cancel": "method",
-		# "on_trash": "method"
 	}
 }
 
