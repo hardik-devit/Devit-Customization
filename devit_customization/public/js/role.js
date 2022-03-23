@@ -1,164 +1,104 @@
 frappe.ui.form.on('Role', {
-refresh: function(frm) {
-// gets the html of the custom field
-let wrapper = frm.fields_dict.custom_html.wrapper;
-// construct custom html
-//Call python method for get doctypes and groups
+    refresh: function (frm) {
+        // gets the html of the custom field
+        let wrapper = frm.fields_dict.custom_html.wrapper;
+        new roleMapping(wrapper, frm.doc.name);
+    }
+})
 
-//on_load: (frm) => {
-//		frappe.call({
-//            method: 'devit_customization.utils.get_user_groups_doctype',
-//            async: false,
-//            callback: function(r) {
-//            if (!r.message || r.message.length == 0) return;
-//                var a=r.message;
-//                console.log("\n=======", a)
-//                var group_list = a[0];
-//                var doctype_list = a[1];
-//            }
-//        });
-//},
+var roleMapping = class CustomRoleMapping {
+    constructor(parent, role) {
+        this.wrapper = $(parent).empty();
+        this.role = role;
+        this.modules_list = [];
 
-let html = $(`<div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table id="datatable" class="table table-bordered   w-100">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>
-                                                        <input type="text" class="form-control" name="" id="group_list">
-                                                    </th>
-                                                    <th>
-                                                        <input type="text" class="form-control" name="" id="doctype_list">
-                                                    </th>
-                                                    <th>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="select-all">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Group</th>
-                                                <th>Document Type</th>
-                                                <th>Level</th>
-                                                <th>Select</th>
-                                                <th>Read</th>
-                                                <th>Write</th>
-                                                <th>Create</th>
-                                                <th>Delete</th>
-                                                <th>Email</th>
-                                                <th>Export</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">Bookkeeping</a> </td>
-                                                    <td>Assets</td>
-                                                    <td>0</td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="read">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+        this.make_html();
+        this.setup();
+    }
+    make_html() {
+        let html = $(`
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="vertical-align: middle;"></th>
+                            <th rowspan="2" style="vertical-align: middle;">${__("Group")}</th>
+                            <th rowspan="2" style="vertical-align: middle;">${__("Document Type")}</th>
+                            <th rowspan="2" style="vertical-align: middle;">${__("Level")}</th>
+                            <th colspan="10" style="text-align: center;">${__("Permissions")}</th>
+                        </tr>
+                        <tr>
+                            <th>${__("Select")}</th>
+                            <th>${__("Read")}</th>
+                            <th>${__("Write")}</th>
+                            <th>${__("Create")}</th>
+                            <th>${__("Delete")}</th>
+                            <th>${__("Submit")}</th>
+                            <th>${__("Amend")}</th>
+                            <th>${__("Print")}</th>
+                            <th>${__("Report")}</th>
+                            <th>${__("Export")}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="14" style="text-align: center;">${__("No records found!")}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `).appendTo(this.wrapper);
+    }
+    setup() {
+        this.get_doctype_data()
+    }
+    get_doctype_data() {
+        let me = this;
+        frappe.call({
+            method: 'devit_customization.utils.get_doctype_data',
+            args: {
+                role: me.role
+            },
+            callback: function(r) {
+                if(r.message && r.message.length > 0){
+                    me.modules_list = r.message;
+                }
+                me.map_html();
+            }
+        })
+    }
+    map_html() {
+        if(this.modules_list.length > 0) {
+            this.wrapper.find('tbody').html('');
+            this.expanded_id = 0;
+            this.modules_list.map((module, i) => {
+                let row = $(`<tr data-idx="${i}" data-mod="${module.name}">
+                    <td>
+                        <div>
+                            <svg class="icon  icon-md icon-down" style="cursor: pointer;">
+                                <use class="" href="#icon-down"></use>
+                            </svg>
+                            <svg class="icon icon-md icon-up" style="display: none;cursor: pointer;">
+                                <use class="" href="#icon-down"></use>
+                            </svg>
                         </div>
-                    </div>
-`).appendTo(wrapper);
-
-// add click function to the button in custom html
-html.find('.btn-primary').click(() => {
-frappe.msgprint("Button clicked");
-})
+                    </td>
+                    <td>${__(module.name)}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>`);
+                this.wrapper.find('tbody').append(row);
+            })
+        }
+    }
 }
-})
