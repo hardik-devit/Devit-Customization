@@ -1,6 +1,7 @@
+import json
 import frappe
 from frappe import _
-from frappe.permissions import get_all_perms, get_linked_doctypes, update_permission_property
+from frappe.permissions import get_all_perms, get_linked_doctypes, update_permission_property, add_permission
 
 def validate_item(doc, method=None):
     check_records = frappe.get_list('Item', filters=[["cwg1", "=", "%s"%(doc.cwg1)], ['name', '!=', str(doc.name)]])
@@ -58,17 +59,15 @@ def get_permissions(doctype=None, role=None):
 
 @frappe.whitelist()
 def update_permission(doctype, role, permlevel, ptype, value=None):
-	"""Update role permission params
+    if not frappe.db.exists('Custom DocPerm', dict(parent=doctype, role=role, permlevel=permlevel)):
+        add_permission(doctype, role, permlevel, ptype)
+    else:
+        out = update_permission_property(doctype, role, permlevel, ptype, value)
+        return 'refresh' if out else None
 
-	Args:
-		doctype (str): Name of the DocType to update params for
-		role (str): Role to be updated for, eg "Website Manager".
-		permlevel (int): perm level the provided rule applies to
-		ptype (str): permission type, example "read", "delete", etc.
-		value (None, optional): value for ptype, None indicates False
-
-	Returns:
-		str: Refresh flag is permission is updated successfully
-	"""
-	out = update_permission_property(doctype, role, permlevel, ptype, value)
-	return 'refresh' if out else None
+@frappe.whitelist()
+def bulk_update_permission(dt_list, role, ptype, value=None):
+    if isinstance(dt_list, str):
+        dt_list = json.loads(dt_list)
+    for dt in dt_list:
+        update_permission(dt.get('name'), role, dt.get('permlevel'), ptype, value)

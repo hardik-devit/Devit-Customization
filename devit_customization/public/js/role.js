@@ -27,12 +27,13 @@ var roleMapping = class CustomRoleMapping {
                             <th rowspan="2" style="vertical-align: middle;">${__("Document Type")}</th>
                             <th rowspan="2" style="vertical-align: middle;">${__("Level")}</th>
                             <th colspan="${this.perm_list.length}" style="text-align: center;">${__("Permissions")}</th>
+                            <th rowspan="2"></th>
                         </tr>
                         <tr class="permission"></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="${this.perm_list.length + 4}" style="text-align: center;">${__("No records found!")}</td>
+                            <td colspan="${this.perm_list.length + 5}" style="text-align: center;">${__("No records found!")}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,10 +73,9 @@ var roleMapping = class CustomRoleMapping {
         })
     }
     map_html() {
-        // let me = this;
+        let me = this;
         if(this.modules_list.length > 0) {
             this.wrapper.find('tbody').html('');
-            // this.active_module;
             this.modules_list.map((module, i) => {
                 let row = $(`<tr data-idx="${i}" data-mod="${module.name}">
                     <td>
@@ -92,69 +92,133 @@ var roleMapping = class CustomRoleMapping {
                     <td></td><td></td>
                 </tr>`);
                 row.find('.icon-down').click(() => {
-                    // me.active_module = module.name;
-                    // this.wrapper.find('tbody tr[data-parent-type="module"]').slideUp();
                     this.wrapper.find('tbody tr[data-parent="' + module.name + '"]').slideDown();
                     row.find('.icon-down').hide();
                     row.find('.icon-up').show();
+                    this.wrapper.find('tr[data-mod="' + module.name +'"]').find('.checkbox').css('display', 'block');
                 });
                 row.find('.icon-up').click(() => {
                     this.wrapper.find('tbody tr[data-parent="' + module.name + '"]').slideUp();
                     row.find('.icon-up').hide();
                     row.find('.icon-down').show();
+                    this.wrapper.find('tr[data-mod="' + module.name +'"]').find('.checkbox').css('display', 'none');
                 })
                 this.perm_list.map(p => {
-                    row.append(`<td></td>`);
-                })
+                    let ptype = p.toLowerCase().replace(/ /g, '_');
+                    let check = $(`<td>
+                        <div class="checkbox" style="display: none;">
+                            <label>
+                                <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="${ptype}" placeholder="" data-doctype="Role" data-type="module"></span>
+                                <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
+                            </label>
+                        </div>
+                    </td>`);
+                    check.find('input[type="checkbox"][data-fieldname="' + ptype + '"]').change(() => {
+                        let is_checked = check.find('input[type="checkbox"][data-fieldname="' + ptype + '"][data-type="module"]').is(':checked');
+                        let dt_list = [];
+                        this.wrapper.find('tr[data-parent="' + module.name + '"]').find('input[type="checkbox"][data-fieldname="' + ptype + '"]').each(function() {
+                            $(this).prop('checked', is_checked ? true : false);
+
+                            dt_list.push({
+                                'name': $(this).attr('data-doctype'),
+                                'permlevel': $(this).attr('data-level')
+                            })
+                        })
+                        this.update_permission_bulk(dt_list, ptype, (is_checked ? 1 : 0));
+                    })
+                    row.append(check);
+                });
+                row.append(`<td></td>`);
                 this.wrapper.find('tbody').append(row);
                 module.doctypes.map(dt => {
+                    let dt_row = '';
                     if(!dt.permissions || dt.permissions.length == 0) {
-                        let dt_row = $(`<tr data-parent="${module.name}" data-idx="0" data-dt="${dt.name}" data-parent-type="module">
-                            <td></td><td></td>
+                        dt_row = $(`<tr data-parent="${module.name}" data-idx="0" data-dt="${dt.name}" data-parent-type="module">
+                            <td></td>
+                            <td>
+                                <div class="checkbox" style="display: none">
+                                    <label>
+                                        <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="check_row" placeholder="" data-doctype="Role"></span>
+                                        <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
+                                    </label>
+                                </div>
+                            </td>
                             <td>${__(dt.name)}</td>
                             <td class="text-center">0</td>
                         </tr>`);
                         dt_row = this.setup_checkboxes(dt_row, dt.name);
-                        this.wrapper.find('tbody').append(dt_row);
+                        dt_row.append(`<td>
+                            <button class="btn btn-primary btn-sm">
+                                <svg class="icon icon-sm">
+                                    <use class="" href="#icon-add"></use>
+                                </svg>
+                            </button>
+                        </td>`);                        
                     }
                     dt.permissions.map((perm, k) => {
-                        let dt_row = $(`<tr data-parent="${module.name}" data-idx="${k}" data-dt="${dt.name}" data-parent-type="module">
-                            <td></td><td></td>
+                        dt_row = $(`<tr data-parent="${module.name}" data-idx="${k}" data-dt="${dt.name}" data-parent-type="module">
+                            <td></td>
+                            <td>
+                                <div class="checkbox" style="display: none">
+                                    <label>
+                                        <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="check_row" placeholder="" data-doctype="Role"></span>
+                                        <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
+                                    </label>
+                                </div>
+                            </td>
                             <td>${__(dt.name)}</td>
                             <td class="text-center">${perm.permlevel}</td>
                         </tr>`);
                         dt_row = this.setup_checkboxes(dt_row, dt.name, perm);
-                        this.wrapper.find('tbody').append(dt_row);
+                        if(perm.permlevel == 0) {
+                            dt_row.append(`<td>
+                                <button class="btn btn-primary btn-sm">
+                                    <svg class="icon icon-sm">
+                                        <use class="" href="#icon-add"></use>
+                                    </svg>
+                                </button>
+                            </td>`);
+                        } else {
+                            dt_row.append(`<td></td>`);
+                        }
                     });
+                    dt_row.find('.btn-primary').click(function() {
+                        me.add_new_perm(dt.name);
+                    })
+                    this.wrapper.find('tbody').append(dt_row);
                 });
             })
         }
     }
     setup_checkboxes(row_html, dt, permissions) {
         this.perm_list.map(p => {
-            let perm = p.toLowerCase().replace(/ /g, '_')
-            let ch = $(`<td>
-                <div class="checkbox">
-                    <label>
-                        <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="${perm}" placeholder="" data-doctype="Role"></span>
-                        <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
-                    </label>
-                </div>
-            </td>`);
-            let level = 0
-            if(permissions && permissions[perm] == 1)
-                ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').prop('checked', true);
+            let perm = p.toLowerCase().replace(/ /g, '_');
+            let level = 0;
             if(permissions)
                 level = permissions.permlevel || 0;
-            ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').change(() => {
-                let is_checked = ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').is(':checked');
-                this.update_permission(dt, level, perm, (is_checked ? 1 : 0));
-            })
-            row_html.append(ch);
+            if(level == 0 || (has_common([perm], ['read', 'write']))) {
+                let ch = $(`<td>
+                    <div class="checkbox">
+                        <label>
+                            <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="${perm}" placeholder="" data-doctype="${dt}" data-level="${level}"></span>
+                            <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
+                        </label>
+                    </div>
+                </td>`);
+                if(permissions && permissions[perm] == 1)
+                    ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').prop('checked', true);
+                ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').change(() => {
+                    let is_checked = ch.find('input[type="checkbox"][data-fieldname="' + perm + '"]').is(':checked');
+                    this.update_permission(dt, level, perm, (is_checked ? 1 : 0));
+                })
+                row_html.append(ch);
+            } else {
+                row_html.append(`<td></td>`);
+            }            
         });
         return row_html;
     }
-    update_permission(dt, plevel, ptype, value) {
+    update_permission(dt, plevel, ptype, value, reload_value) {
         let me = this;
         frappe.call({
             method: 'devit_customization.utils.update_permission',
@@ -165,7 +229,60 @@ var roleMapping = class CustomRoleMapping {
                 ptype: ptype,
                 value: value
             },
+            freeze: true,
+            callback: function(r) {
+                if(reload_value) {
+                    me.get_doctype_data();
+                }
+            }
+        })
+    }
+    update_permission_bulk(dt_list, ptype, value) {
+        let me = this;
+        frappe.call({
+            method: 'devit_customization.utils.bulk_update_permission',
+            args: {
+                dt_list: dt_list,
+                role: me.role,
+                ptype: ptype,
+                value: value
+            },
             freeze: true
         })
+    }
+    add_new_perm(dt) {
+        let me = this;
+        let dialog = new frappe.ui.Dialog({
+            title: __("Add New Rule"),
+            fields: [
+                {
+                    'fieldtype': 'Data',
+                    'read_only': 1,
+                    'label': __('Document Type'),
+                    'default': dt,
+                    'fieldname': 'doctype'
+                },
+                {
+                    'fieldtype': 'Data',
+                    'read_only': 1,
+                    'label': __('Role'),
+                    'default': dt,
+                    'fieldname': 'Role'
+                },
+                {
+                    'fieldtype': 'Select',
+                    'fieldname': 'permlevel',
+                    'label': __('Permission Level'),
+                    'options': '0\n1\n2\n3\n4\n5\n6\n7\n8\n9',
+                    'reqd': 1
+                }
+            ],
+            primary_action_label: __('Save'),
+            primary_action: (value) => {
+                me.update_permission(dt, value.permlevel, 'read', 1, true);
+                dialog.hide();
+            }
+        })
+        dialog.show();
     }
 }
