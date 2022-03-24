@@ -1,5 +1,6 @@
 frappe.ui.form.on('Role', {
     refresh: function (frm) {
+        frm.remove_custom_button('Role Permissions Manager');
         // gets the html of the custom field
         let wrapper = frm.fields_dict.custom_html.wrapper;
         new roleMapping(wrapper, frm.doc.name);
@@ -27,7 +28,6 @@ var roleMapping = class CustomRoleMapping {
                             <th rowspan="2" style="vertical-align: middle;">${__("Document Type")}</th>
                             <th rowspan="2" style="vertical-align: middle;">${__("Level")}</th>
                             <th colspan="${this.perm_list.length}" style="text-align: center;">${__("Permissions")}</th>
-                            <th rowspan="2"></th>
                         </tr>
                         <tr class="permission"></tr>
                     </thead>
@@ -64,6 +64,7 @@ var roleMapping = class CustomRoleMapping {
             args: {
                 role: me.role
             },
+            freeze: true,
             callback: function(r) {
                 if(r.message && r.message.length > 0){
                     me.modules_list = r.message;
@@ -128,74 +129,55 @@ var roleMapping = class CustomRoleMapping {
                     })
                     row.append(check);
                 });
-                row.append(`<td></td>`);
                 this.wrapper.find('tbody').append(row);
-                module.doctypes.map(dt => {
-                    let dt_row = '';
+                module.doctypes.map(dt => {                    
                     if(!dt.permissions || dt.permissions.length == 0) {
-                        dt_row = $(`<tr data-parent="${module.name}" data-idx="0" data-dt="${dt.name}" data-parent-type="module">
-                            <td></td>
-                            <td>
-                                <div class="checkbox" style="display: none">
-                                    <label>
-                                        <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="check_row" placeholder="" data-doctype="Role"></span>
-                                        <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td>${__(dt.name)}</td>
-                            <td class="text-center">0</td>
-                        </tr>`);
-                        dt_row = this.setup_checkboxes(dt_row, dt.name);
-                        dt_row.append(`<td>
-                            <button class="btn btn-primary btn-sm">
-                                <svg class="icon icon-sm">
-                                    <use class="" href="#icon-add"></use>
-                                </svg>
-                            </button>
-                        </td>`);                        
+                        me.setup_columns(module.name, dt.name, 0, 0);
                     }
                     dt.permissions.map((perm, k) => {
-                        dt_row = $(`<tr data-parent="${module.name}" data-idx="${k}" data-dt="${dt.name}" data-parent-type="module">
-                            <td></td>
-                            <td>
-                                <div class="checkbox" style="display: none">
-                                    <label>
-                                        <span class="input-area"><input type="checkbox" autocomplete="off" class="input-with-feedback" data-fieldtype="Check" data-fieldname="check_row" placeholder="" data-doctype="Role"></span>
-                                        <span class="disp-area" style="display: none;"><input type="checkbox" disabled="" class="disabled-selected"></span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td>${__(dt.name)}</td>
-                            <td class="text-center">${perm.permlevel}</td>
-                        </tr>`);
-                        dt_row = this.setup_checkboxes(dt_row, dt.name, perm);
-                        if(perm.permlevel == 0) {
-                            dt_row.append(`<td>
-                                <button class="btn btn-primary btn-sm">
-                                    <svg class="icon icon-sm">
-                                        <use class="" href="#icon-add"></use>
-                                    </svg>
-                                </button>
-                            </td>`);
-                        } else {
-                            dt_row.append(`<td></td>`);
-                        }
+                        me.setup_columns(module.name, dt.name, k, perm.permlevel, perm);
                     });
-                    dt_row.find('.btn-primary').click(function() {
-                        me.add_new_perm(dt.name);
-                    })
-                    this.wrapper.find('tbody').append(dt_row);
                 });
             })
         }
     }
-    setup_checkboxes(row_html, dt, permissions) {
+    setup_columns(module, dt, idx, permlevel, permission) {
+        let me = this;
+        let add_role_btn = `<button class="btn btn-primary btn-sm">
+                <svg class="icon icon-sm">
+                    <use class="" href="#icon-add"></use>
+                </svg>
+            </button>`;
+        let delete_btn = `<button class="btn btn-danger btn-sm">
+                <svg class="icon icon-sm">
+                    <use class="" href="#icon-delete"></use>
+                </svg>
+            </button>`;
+        let dt_row = $(`<tr data-parent="${module}" data-idx="${idx}" data-dt="${dt}" data-parent-type="module">
+                <td></td>
+                <td class="text-center" style="vertical-align: center;">
+                    ${permlevel == 0 ? add_role_btn : ''} ${delete_btn}
+                </td>
+                <td>${__(dt)}</td>
+                <td class="text-center">${permlevel}</td>
+            </tr>`);
+        dt_row = this.setup_checkboxes(dt_row, dt, permlevel, permission);   
+        dt_row.find('.btn-primary').click(function() {
+            me.add_new_perm(dt);
+        });
+        dt_row.find('.btn-danger').click(function() {
+            me.delete_perm(dt, permlevel);
+        });
+        this.wrapper.find('tbody').append(dt_row);    
+    }
+    setup_checkboxes(row_html, dt, permlevel, permissions) {
         this.perm_list.map(p => {
             let perm = p.toLowerCase().replace(/ /g, '_');
             let level = 0;
             if(permissions)
                 level = permissions.permlevel || 0;
+            else if(permlevel)
+                level = permlevel;
             if(level == 0 || (has_common([perm], ['read', 'write']))) {
                 let ch = $(`<td>
                     <div class="checkbox">
@@ -284,5 +266,19 @@ var roleMapping = class CustomRoleMapping {
             }
         })
         dialog.show();
+    }
+    delete_perm(dt, permlevel) {
+        frappe.call({
+            method: 'devit_customization.utils.remove_permission',
+            args: {
+                doctype: dt,
+                role: this.role,
+                permlevel: permlevel
+            },
+            freeze: true,
+            callback: (r) => {
+                this.get_doctype_data();
+            }
+        })
     }
 }
