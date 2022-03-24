@@ -4,7 +4,7 @@ from frappe import _
 from frappe.permissions import get_all_perms, get_linked_doctypes, update_permission_property, add_permission
 
 def validate_item(doc, method=None):
-    check_records = frappe.get_list('Item', filters=[["cwg1", "=", "%s"%(doc.cwg1)], ['name', '!=', str(doc.name)]])
+    check_records = frappe.get_list('Item', filters=[["cwg1", "=", doc.cwg1], ['name', '!=', str(doc.name)]])
     if check_records:
         frappe.throw(_("CWG Field should be Unique for all records..!!"))
 

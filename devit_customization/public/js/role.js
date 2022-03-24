@@ -266,7 +266,7 @@ var roleMapping = class CustomRoleMapping {
                     'fieldtype': 'Data',
                     'read_only': 1,
                     'label': __('Role'),
-                    'default': dt,
+                    'default': this.role,
                     'fieldname': 'Role'
                 },
                 {
