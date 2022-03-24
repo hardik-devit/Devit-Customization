@@ -1,7 +1,8 @@
 import json
 import frappe
 from frappe import _
-from frappe.permissions import get_all_perms, get_linked_doctypes, update_permission_property, add_permission
+from frappe.permissions import get_all_perms, get_linked_doctypes, update_permission_property, add_permission, setup_custom_perms
+from frappe.core.doctype.doctype.doctype import validate_permissions_for_doctype
 
 def validate_item(doc, method=None):
     check_records = frappe.get_list('Item', filters=[["cwg1", "=", doc.cwg1], ["cwg1", "!=", None], ['name', '!=', str(doc.name)]])
@@ -70,3 +71,14 @@ def bulk_update_permission(dt_list, role, ptype, value=None):
         dt_list = json.loads(dt_list)
     for dt in dt_list:
         update_permission(dt.get('name'), role, dt.get('permlevel'), ptype, value)
+
+@frappe.whitelist()
+def remove_permission(doctype, role, permlevel):
+	setup_custom_perms(doctype)
+
+	frappe.db.delete("Custom DocPerm", {"parent": doctype, "role": role, "permlevel": permlevel})
+
+	if not frappe.get_all('Custom DocPerm', {"parent": doctype}):
+		frappe.throw(_('There must be atleast one permission rule.'), title=_('Cannot Remove'))
+
+	validate_permissions_for_doctype(doctype, for_remove=True, alert=True)
