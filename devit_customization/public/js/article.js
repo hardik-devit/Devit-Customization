@@ -1,6 +1,8 @@
 frappe.ui.form.on('Item', {
-    refresh(frm) {
+    refresh: function(frm) {
         frm.trigger('set_mandatory_fields');
+        console.log("\n========frm.doc.article_name_german>>", frm.doc)
+		frm.toggle_display('netto_weight_in_kg', frm.doc. == "test");
     },
 
     set_mandatory_fields(frm) {
