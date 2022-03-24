@@ -8,7 +8,6 @@ def validate_item(doc, method=None):
     if check_records:
         frappe.throw(_("CWG ID already used, thís ID should be unique"))
 
-
 @frappe.whitelist()
 def get_user_groups_doctype():
     group_list = [d.name for d in frappe.db.get_all("User Group")]
