@@ -23,6 +23,16 @@ var roleMapping = class CustomRoleMapping {
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th></th>
+                            <th>
+                                <input type="text" id="modSearch" class="form-control" />
+                            </th>
+                            <th>
+                                <input type="text" id="dtSearch" class="form-control" />
+                            </th>
+                            <th colspan="${this.perm_list.length + 1}"></th>
+                        </tr>
+                        <tr>
                             <th rowspan="2" style="vertical-align: middle;"></th>
                             <th rowspan="2" style="vertical-align: middle;">${__("Group")}</th>
                             <th rowspan="2" style="vertical-align: middle;">${__("Document Type")}</th>
@@ -52,7 +62,10 @@ var roleMapping = class CustomRoleMapping {
         `).appendTo(this.wrapper);
         this.perm_list.map(p => {
             this.wrapper.find('thead .permission').append(`<th>${__(p)}</th>`);
-        })
+        });
+        this.$module_search = this.wrapper.find('#modSearch');
+        this.$doctype_search = this.wrapper.find('#dtSearch');
+        this.setup_search();
     }
     setup() {
         this.get_doctype_data()
@@ -78,7 +91,7 @@ var roleMapping = class CustomRoleMapping {
         if(this.modules_list.length > 0) {
             this.wrapper.find('tbody').html('');
             this.modules_list.map((module, i) => {
-                let row = $(`<tr data-idx="${i}" data-mod="${module.name}">
+                let row = $(`<tr data-idx="${i}" data-mod="${module.name}" data-type="module">
                     <td>
                         <div>
                             <svg class="icon  icon-md icon-down" style="cursor: pointer;">
@@ -280,5 +293,49 @@ var roleMapping = class CustomRoleMapping {
                 this.get_doctype_data();
             }
         })
+    }
+    setup_search() {
+        this.$module_search.on('keyup', (e) => {
+            let txt = this.$module_search.val();
+            txt = txt.toLowerCase();
+            if(txt.length > 2) {
+                let res = [];
+                this.modules_list.map(m => {
+                    if(m.name.toLowerCase().match(txt))
+                        res.push(m.name);
+                });
+                this.wrapper.find('tbody tr').hide();
+                if(res.length > 0) {
+                    res.map(r => {
+                        this.wrapper.find('tbody tr[data-mod="' + r + '"]').show();
+                    })
+                }
+            } else if(!txt || txt == '') {
+                this.wrapper.find('tbody tr[data-parent-type="module"]').hide();
+                this.wrapper.find('tbody tr[data-type="module"]').show();
+            }
+        });
+        this.$doctype_search.on('keyup', () => {
+            let txt = this.$doctype_search.val();
+            txt = txt.toLowerCase();
+            if(txt.length > 2) {
+                let res = [];
+                this.modules_list.map(m => {
+                    m.doctypes.map(d => {
+                        if(d.name.toLowerCase().match(txt))
+                            res.push(d.name);
+                    })
+                });
+                this.wrapper.find('tbody tr').hide();
+                if(res.length > 0) {
+                    res.map(r => {
+                        this.wrapper.find('tbody tr[data-dt="' + r + '"]').show();
+                    })
+                }
+            } else if(!txt || txt == '') {
+                this.wrapper.find('tbody tr[data-parent-type="module"]').hide();
+                this.wrapper.find('tbody tr[data-type="module"]').show();
+            }
+        });
     }
 }
