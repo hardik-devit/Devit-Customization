@@ -1,14 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:article_type_english",
+ "autoname": "field:article_type_german",
  "creation": "2022-03-21 18:22:06.582932",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "article_type_english",
   "article_type_german",
+  "article_type_english",
   "article_type_italian"
  ],
  "fields": [
@@ -23,7 +23,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Article Type German",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "article_type_italian",
@@ -33,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-21 19:34:18.895374",
+ "modified": "2022-03-24 17:09:52.793068",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Article Type",
