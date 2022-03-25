@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-03-25 12:53:25.041222",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "priority",
+  "column_break_6",
+  "process_step",
+  "column_break_12",
+  "max_temp",
+  "column_break_18",
+  "temperature",
+  "column_break_24",
+  "time_in_min",
+  "column_break_30",
+  "humidity_in_",
+  "column_break_36",
+  "oven_program"
+ ],
+ "fields": [
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "process_step",
+   "fieldtype": "Data",
+   "label": "Process-Step"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max_temp",
+   "fieldtype": "Data",
+   "label": "Max. Temp"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "temperature",
+   "fieldtype": "Data",
+   "label": "Temperature"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "time_in_min",
+   "fieldtype": "Data",
+   "label": "Time in min"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "humidity_in_",
+   "fieldtype": "Data",
+   "label": "Humidity in %"
+  },
+  {
+   "fieldname": "column_break_36",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "oven_program",
+   "fieldtype": "Data",
+   "label": "Oven program"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-03-25 12:58:57.098428",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Production Process Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

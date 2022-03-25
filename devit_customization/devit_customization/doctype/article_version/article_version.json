@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-03-25 12:26:43.232290",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "v1",
+  "v2",
+  "v3"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "v1",
+   "fieldtype": "Check",
+   "label": "V1"
+  },
+  {
+   "default": "0",
+   "fieldname": "v2",
+   "fieldtype": "Check",
+   "label": "V2"
+  },
+  {
+   "default": "0",
+   "fieldname": "v3",
+   "fieldtype": "Check",
+   "label": "V3"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-25 12:26:43.232290",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Article Version",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
