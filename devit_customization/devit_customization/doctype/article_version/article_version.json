@@ -1,41 +1,30 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2022-03-25 12:26:43.232290",
+ "autoname": "field:version",
+ "creation": "2022-03-26 13:24:26.481043",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "v1",
-  "v2",
-  "v3"
+  "version"
  ],
  "fields": [
   {
-   "default": "0",
-   "fieldname": "v1",
-   "fieldtype": "Check",
-   "label": "V1"
-  },
-  {
-   "default": "0",
-   "fieldname": "v2",
-   "fieldtype": "Check",
-   "label": "V2"
-  },
-  {
-   "default": "0",
-   "fieldname": "v3",
-   "fieldtype": "Check",
-   "label": "V3"
+   "fieldname": "version",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Version",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-25 12:26:43.232290",
+ "modified": "2022-03-26 13:29:38.511433",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Article Version",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
