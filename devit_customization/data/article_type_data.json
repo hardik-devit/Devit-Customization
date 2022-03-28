@@ -1,0 +1,18 @@
+[
+  {
+    "article_type_english": "Raw Material",
+    "article_type_german": "Rohstoffe"
+  },
+  {
+    "article_type_english": "Finished good",
+    "article_type_german": "Fertigwaren"
+  },
+  {
+    "article_type_english": "Dough",
+    "article_type_german": "Teig"
+  },
+  {
+    "article_type_english": "Retail good",
+    "article_type_german": "Einzelhandelswaren"
+  }
+]
