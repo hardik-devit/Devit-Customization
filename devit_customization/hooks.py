@@ -123,6 +123,8 @@ doc_events = {
 	}
 }
 
+doctype_list_js = {"Item" : "public/js/item_list.js"}
+
 # Scheduled Tasks
 # ---------------
 
