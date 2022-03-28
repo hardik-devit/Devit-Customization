@@ -1,26 +1,37 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:version",
+ "autoname": "field:article_version_german",
  "creation": "2022-03-26 13:24:26.481043",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "version"
+  "article_version_german",
+  "article_version_italian",
+  "article_version_english"
  ],
  "fields": [
   {
-   "fieldname": "version",
+   "fieldname": "article_version_german",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Version",
+   "label": "Article Version German",
    "unique": 1
+  },
+  {
+   "fieldname": "article_version_italian",
+   "fieldtype": "Data",
+   "label": "Article Version Italian"
+  },
+  {
+   "fieldname": "article_version_english",
+   "fieldtype": "Data",
+   "label": "Article Version English"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-26 13:29:38.511433",
+ "modified": "2022-03-28 13:17:44.039992",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Article Version",
