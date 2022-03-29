@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-03-29 01:42:44.174709",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "article_type",
+  "amount_in_grams"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "article_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Article Type",
+   "options": "Article Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount_in_grams",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount In grams",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-03-29 01:42:44.174709",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Recipe Item",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

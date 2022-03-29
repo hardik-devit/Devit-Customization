@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "autoname": "format:{item_code}-{version}",
+ "creation": "2022-03-28 22:33:24.141756",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "version",
+  "section_break_3",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "version",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Version",
+   "options": "Article Version",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Recipe Item"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-29 04:19:32.086183",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Recipe",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

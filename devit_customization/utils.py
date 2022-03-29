@@ -82,3 +82,45 @@ def remove_permission(doctype, role, permlevel):
 		frappe.throw(_('There must be atleast one permission rule.'), title=_('Cannot Remove'))
 
 	validate_permissions_for_doctype(doctype, for_remove=True, alert=True)
+
+@frappe.whitelist()
+def get_recipe_detail(item_code, version=None):
+    filters = {'item_code': item_code}
+    if version:
+        filters = {'name': version}
+    recipe_list = frappe.get_list('Recipe', fields=['name', 'item_code', 'version'], filters=filters, order_by='creation desc', limit_page_length=1)
+    if recipe_list:
+        recipe_list[0].items = frappe.get_list('Recipe Item', fields=['item_code', 'item_name', 'article_type', 'amount_in_grams', 'name', 'parent', 'idx', 'parenttype', 'parentfield'], filters={'parent': recipe_list[0].name}, order_by='idx')
+        return recipe_list[0]
+
+@frappe.whitelist()
+def insert_recipe_item(doc):
+    if isinstance(doc, str):
+        doc = json.loads(doc)
+    
+    parent = frappe.get_doc(doc.get('parenttype'), doc.get('parent'))
+    parent.append(doc.get('parentfield'), doc)
+    parent.save()
+    return parent.as_dict()
+
+@frappe.whitelist()
+def update_recipe_item(doc):
+    if isinstance(doc, str):
+        doc = json.loads(doc)
+    
+    parent = frappe.get_doc(doc.get('parenttype'), doc.get('parent'))
+    for item in parent.items:
+        if item.name == doc.get('name'):
+            item.update(doc)
+    parent.save()
+    return parent.as_dict()
+
+@frappe.whitelist()
+def delete_recipe_item(docname, parent):
+    frappe.delete_doc('Recipe Item', docname)
+    doc = frappe.get_doc('Recipe', parent)
+    if doc.items:
+        for i,item in enumerate(doc.items):
+            item.idx = (i + 1)
+    doc.save()
+    return doc.as_dict()

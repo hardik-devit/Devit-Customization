@@ -111,8 +111,10 @@ override_doctype_class = {
 # 		"on_trash": "method"
 # 	}
 # }
-doctype_js = {"Role" : "public/js/role.js",
-			  "Item": "public/js/article.js"}
+doctype_js = {
+	"Role" : "public/js/role.js",
+	"Item": "public/js/article.js"
+}
 
 # will be executed after successfully installing this app
 after_install = "devit_customization.install.after_install"
