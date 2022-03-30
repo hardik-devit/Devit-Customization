@@ -17,50 +17,52 @@
  "fields": [
   {
    "fieldname": "priority",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Priority"
   },
   {
    "fieldname": "process_step",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Process-Step"
+   "label": "Process-Step",
+   "options": "Process Step"
   },
   {
    "fieldname": "max_temp",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Max. Temp"
   },
   {
    "fieldname": "temperature",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Temperature"
   },
   {
    "fieldname": "time_in_min",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Time in min"
   },
   {
    "fieldname": "humidity_in_",
-   "fieldtype": "Data",
+   "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Humidity in %"
   },
   {
    "fieldname": "oven_program",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Oven program"
+   "label": "Oven program",
+   "options": "Oven Program"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-03-26 13:52:19.750732",
+ "modified": "2022-03-30 16:22:03.368333",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Production Process Table",
