@@ -10,7 +10,8 @@ frappe.ui.form.on('Item', {
         else{
             frm.page.set_title(frm.doc.article_name_english)
         }
-        frm.trigger('set_mandatory_fields');
+        if(!frm.doc.item_code)
+            frm.trigger('set_mandatory_fields');
 
 		frm.toggle_display(['discount_group', 'kg_price', 'preisschild', 'verrechnung', 'package_amount_in_kg', 'vat'], ["Finished good", "Fertigware", "Beendet gut"].includes(frm.doc.article_type) || ["Retail good", "Einzelhandelswaren"].includes(frm.doc.article_type));
         frm.toggle_display(['netto_weight_in_kg', 'brutto_weight_in_kg', 'baked_weight_in_kg', 'nr_of_items_on_plate', 'plates_per_trolley', 'retours', 'retourenartikel', 'empty_retours', 'retourenanteilsberechnung'], ["Finished good", "Fertigware", "Beendet gut"].includes(frm.doc.article_type));

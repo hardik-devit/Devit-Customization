@@ -128,7 +128,12 @@ def delete_recipe_item(docname, parent):
 @frappe.whitelist()
 def insert_recipe(item_code, version, base_version=None):
     if not frappe.db.get_value('Article Version', version):
-        frappe.get_doc({'doctype': 'Article Version', 'version': version}).insert()
+        frappe.get_doc({
+            'doctype': 'Article Version', 
+            'article_version_german': version,
+            'article_version_italian': version,
+            'article_version_english': version
+        }).insert()
     
     recipe = frappe.get_doc({
         'doctype':'Recipe',
