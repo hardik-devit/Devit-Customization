@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:process_step_german",
+ "creation": "2022-03-30 14:52:32.059911",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "process_step_german",
+  "process_step_italian",
+  "process_step_english"
+ ],
+ "fields": [
+  {
+   "fieldname": "process_step_german",
+   "fieldtype": "Data",
+   "label": "Process Step German",
+   "unique": 1
+  },
+  {
+   "fieldname": "process_step_italian",
+   "fieldtype": "Data",
+   "label": "Process Step Italian"
+  },
+  {
+   "fieldname": "process_step_english",
+   "fieldtype": "Data",
+   "label": "Process Step English",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-30 14:55:20.825127",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Process Step",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
