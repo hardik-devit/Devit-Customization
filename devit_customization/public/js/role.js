@@ -156,12 +156,12 @@ var roleMapping = class CustomRoleMapping {
     }
     setup_columns(module, dt, idx, permlevel, permission) {
         let me = this;
-        let add_role_btn = `<button class="btn btn-sm">
+        let add_role_btn = `<button class="btn btn-sm add-permission">
                 <svg class="icon icon-sm">
                     <use class="" href="#icon-add"></use>
                 </svg>
             </button>`;
-        let delete_btn = `<button class="btn btn-sm">
+        let delete_btn = `<button class="btn btn-sm remove-permission">
                 <svg class="icon icon-sm">
                     <use class="" href="#icon-delete"></use>
                 </svg>
@@ -175,10 +175,10 @@ var roleMapping = class CustomRoleMapping {
                 <td class="text-center">${permlevel}</td>
             </tr>`);
         dt_row = this.setup_checkboxes(dt_row, dt, permlevel, permission);   
-        dt_row.find('.btn-primary').click(function() {
+        dt_row.find('.add-permission').click(function() {
             me.add_new_perm(dt);
         });
-        dt_row.find('.btn-danger').click(function() {
+        dt_row.find('.remove-permission').click(function() {
             me.delete_perm(dt, permlevel);
         });
         this.wrapper.find('tbody').append(dt_row);    
