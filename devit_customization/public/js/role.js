@@ -156,12 +156,12 @@ var roleMapping = class CustomRoleMapping {
     }
     setup_columns(module, dt, idx, permlevel, permission) {
         let me = this;
-        let add_role_btn = `<button class="btn btn-primary btn-sm">
+        let add_role_btn = `<button class="btn btn-sm">
                 <svg class="icon icon-sm">
                     <use class="" href="#icon-add"></use>
                 </svg>
             </button>`;
-        let delete_btn = `<button class="btn btn-danger btn-sm">
+        let delete_btn = `<button class="btn btn-sm">
                 <svg class="icon icon-sm">
                     <use class="" href="#icon-delete"></use>
                 </svg>
