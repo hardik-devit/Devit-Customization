@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestRecipe(FrappeTestCase):
+class TestOvenProgram(FrappeTestCase):
 	pass

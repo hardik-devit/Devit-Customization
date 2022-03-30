@@ -113,7 +113,8 @@ override_doctype_class = {
 # }
 doctype_js = {
 	"Role" : "public/js/role.js",
-	"Item": "public/js/article.js"
+	"Item": "public/js/article.js",
+	"Production Process Table": "public/js/article.js"
 }
 
 # will be executed after successfully installing this app

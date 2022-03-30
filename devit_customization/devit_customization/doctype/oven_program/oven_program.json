@@ -1,0 +1,59 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:oven_program_german",
+ "creation": "2022-03-30 14:53:54.580655",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "oven_program_german",
+  "oven_program_italian",
+  "oven_program_english"
+ ],
+ "fields": [
+  {
+   "fieldname": "oven_program_german",
+   "fieldtype": "Data",
+   "label": "Oven Program German",
+   "unique": 1
+  },
+  {
+   "fieldname": "oven_program_italian",
+   "fieldtype": "Data",
+   "label": "Oven Program Italian"
+  },
+  {
+   "fieldname": "oven_program_english",
+   "fieldtype": "Data",
+   "label": "Oven Program English"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-30 14:55:07.931408",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Oven Program",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
