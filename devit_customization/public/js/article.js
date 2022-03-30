@@ -165,7 +165,7 @@ var recipe = class ArticleRecipe {
                         "fieldtype": "Link",
                         "options": "Article Version",
                         "label": __("Base Version"),
-                        "reqd": 1
+                        "reqd": 0
                     },
                     {
                         "fieldname": "version",
@@ -203,11 +203,13 @@ var recipe = class ArticleRecipe {
                 }
             });
             d.show();
-            if(me.active_recipe) {
+            if(me.active_recipe && me.active_recipe.version) {
                 d.set_value('base_version', me.active_recipe.version);
                 let current_version = me.active_recipe.version.toLowerCase().split('v')[1];
                 let new_version = parseInt(current_version) + 1;
                 d.set_value('version', `V${new_version}`);
+            } else {
+                d.set_value('version', `V1`);
             }
         })
     }
