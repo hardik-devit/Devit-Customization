@@ -43,6 +43,17 @@ frappe.ui.form.on('Item', {
 		        frm.set_value("item_code", parseInt(res.message));
 			}
 		});
+    },
+
+    before_save(frm) {
+        if(frm.update_recipe) {
+            frappe.call({
+                method: 'devit_customization.utils.update_recipe_edit',
+                args: {
+                    item_code: frm.doc.name,
+                }
+            })
+        }
     }
 })
 
@@ -149,30 +160,27 @@ var recipe = class ArticleRecipe {
                 title: __("Add New Version"),
                 fields: [
                     {
-                        "fieldname": "version",
+                        "fieldname": "base_version",
                         "fieldtype": "Link",
                         "options": "Article Version",
+                        "label": __("Base Version"),
+                        "reqd": 1
+                    },
+                    {
+                        "fieldname": "version",
+                        "fieldtype": "Data",
                         "label": __("Version"),
-                        "reqd": 1,
-                        "get_query": () => {
-                            if(me.active_recipe && me.active_recipe.version) {
-                                return {
-                                    name: ('!=', me.active_recipe.version)
-                                }
-                            }
-                        }
+                        "reqd": 1
                     }
                 ],
                 primary_action_label: __("Save"),
                 primary_action(values) {
                     frappe.call({
-                        method: 'frappe.client.insert',
+                        method: 'devit_customization.utils.insert_recipe',
                         args: {
-                            doc: {
-                                'doctype': 'Recipe',
-                                'item_code': cur_frm.doc.name,
-                                'version': values.version
-                            }
+                            'item_code': cur_frm.doc.name,
+                            'version': values.version,
+                            'base_version': values.base_version
                         },
                         freeze: true,
                         callback: (r) => {
@@ -181,6 +189,10 @@ var recipe = class ArticleRecipe {
                                 if(me.active_recipe) {
                                     me.active_field.set_value(r.message.version);
                                     me.wrapper.find('.recipe-data').show();
+                                    if(!me.active_recipe.allow_item_edit)
+                                        me.wrapper.find('.recipe-data .add-recipe-item').hide();
+                                    else
+                                        me.wrapper.find('.recipe-data .add-recipe-item').show();
                                     me.setup_recipe_items();
                                 }
                             }
@@ -190,6 +202,12 @@ var recipe = class ArticleRecipe {
                 }
             });
             d.show();
+            if(me.active_recipe) {
+                d.set_value('base_version', me.active_recipe.version);
+                let current_version = me.active_recipe.version.toLowerCase().split('v')[1];
+                let new_version = parseInt(current_version) + 1;
+                d.set_value('version', `V${new_version}`);
+            }
         })
     }
     get_active_receipe(version) {
@@ -207,6 +225,11 @@ var recipe = class ArticleRecipe {
                         if(!version)
                             me.active_field.set_value(r.message.version);
                         me.wrapper.find('.recipe-data').show();
+                        if(!me.active_recipe.allow_item_edit) {
+                            me.wrapper.find('.recipe-data .add-recipe-item').hide();
+                        } else {
+                            me.wrapper.find('.recipe-data .add-recipe-item').show();
+                        }                            
                         me.setup_recipe_items();
                     }                        
                 }
@@ -216,15 +239,18 @@ var recipe = class ArticleRecipe {
     setup_recipe_items() {
         if(this.active_recipe.items && this.active_recipe.items.length > 0) {
             this.wrapper.find('tbody').html('');
+            let total_grams = 0;
             this.active_recipe.items.map(item => {
+                total_grams += parseFloat(item.amount_in_grams)
+                let btn = `<button class="btn btn-warning btn-sm">${__("Edit")}</button>
+                        <button class="btn btn-danger btn-sm">${__("Delete")}</button>`;
                 let row = $(`<tr data-id="${item.name}" data-idx="${item.idx}">
                         <td>${item.item_code}</td>
                         <td>${item.item_name}</td>
                         <td>${item.article_type}</td>
-                        <td>${item.amount_in_grams}</td>
+                        <td class="text-right">${item.amount_in_grams}</td>
                         <td style="width: 15%;padding: 10px;vertical-align: middle;">
-                            <button class="btn btn-warning btn-sm">${__("Edit")}</button>
-                            <button class="btn btn-danger btn-sm">${__("Delete")}</button>
+                            ${this.active_recipe.allow_item_edit == 1 ? btn : ''}
                         </td>
                     </tr>`);
                 row.find('.btn-warning').click(() => {
@@ -245,6 +271,7 @@ var recipe = class ArticleRecipe {
                                     if(r.message) {
                                         this.active_recipe = r.message;
                                         this.setup_recipe_items();
+                                        cur_frm.update_recipe = 1;
                                     }
                                 }
                             })
@@ -252,7 +279,14 @@ var recipe = class ArticleRecipe {
                     )
                 })
                 this.wrapper.find('tbody').append(row);
-            })
+            });
+            this.wrapper.find('tbody').append(`<tr>
+                <td><b>${__("Total")}</b></td>
+                <td></td>
+                <td></td>
+                <td class="text-right"><b>${total_grams}</b></td>
+                <td></td>
+            </tr>`);
         } else {
             this.wrapper.find('tbody').html(`<tr>
                     <td colspan="5">${__("No records found!")}</td>
@@ -354,6 +388,7 @@ var recipe = class ArticleRecipe {
                                 me.wrapper.find('tbody tr.add-row').remove();
                             me.active_recipe = r.message;
                             me.setup_recipe_items();
+                            cur_frm.update_recipe = 1;
                         }
                     }
                 })
