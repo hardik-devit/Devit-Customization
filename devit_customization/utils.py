@@ -88,7 +88,7 @@ def get_recipe_detail(item_code, version=None):
     filters = {'item_code': item_code}
     if version:
         filters = {'name': version}
-    recipe_list = frappe.get_list('Recipe', fields=['name', 'item_code', 'version'], filters=filters, order_by='creation desc', limit_page_length=1)
+    recipe_list = frappe.get_list('Recipe', fields=['name', 'item_code', 'version', 'base_version', 'allow_item_edit'], filters=filters, order_by='creation desc', limit_page_length=1)
     if recipe_list:
         recipe_list[0].items = frappe.get_list('Recipe Item', fields=['item_code', 'item_name', 'article_type', 'amount_in_grams', 'name', 'parent', 'idx', 'parenttype', 'parentfield'], filters={'parent': recipe_list[0].name}, order_by='idx')
         return recipe_list[0]
@@ -124,3 +124,29 @@ def delete_recipe_item(docname, parent):
             item.idx = (i + 1)
     doc.save()
     return doc.as_dict()
+
+@frappe.whitelist()
+def insert_recipe(item_code, version, base_version=None):
+    if not frappe.db.get_value('Article Version', version):
+        frappe.get_doc({
+            'doctype': 'Article Version', 
+            'article_version_german': version,
+            'article_version_italian': version,
+            'article_version_english': version
+        }).insert()
+    
+    recipe = frappe.get_doc({
+        'doctype':'Recipe',
+        'item_code': item_code,
+        'version': version,
+        'base_version': base_version,
+        'allow_item_edit': 1
+    }).insert()
+
+    return recipe.as_dict()
+
+@frappe.whitelist()
+def update_recipe_edit(item_code):
+    recipe = get_recipe_detail(item_code)
+    if recipe:
+        frappe.db.set_value('Recipe', recipe.name, 'allow_item_edit', 0)

@@ -8,6 +8,8 @@
  "field_order": [
   "item_code",
   "version",
+  "base_version",
+  "allow_item_edit",
   "section_break_3",
   "items"
  ],
@@ -37,11 +39,25 @@
    "label": "Item",
    "options": "Item",
    "reqd": 1
+  },
+  {
+   "fieldname": "base_version",
+   "fieldtype": "Link",
+   "label": "Base Version",
+   "options": "Article Version",
+   "set_only_once": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_item_edit",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Allow Item Edit"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-29 04:19:32.086183",
+ "modified": "2022-03-30 03:31:40.888318",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Recipe",
