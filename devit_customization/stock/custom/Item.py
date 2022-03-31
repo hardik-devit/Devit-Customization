@@ -9,7 +9,7 @@ class ItemInherit(Item):
         if not self.item_code and not check_records:
             check_records = frappe.get_list('Item', fields=['item_code'])
             count_records = [d['item_code'] for d in check_records]
-            return int(max(count_records)) +1
+            return int(max(count_records or [0])) +1
 
     def autoname(self):
         if frappe.db.get_default("item_naming_by") == "Naming Series":
