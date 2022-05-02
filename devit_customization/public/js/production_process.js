@@ -633,13 +633,19 @@ var production_process = class ArticleProductionProcess {
     }
     setup_add_step() {
         this.wrapper.find('.add-step').click(() => {
-            if(this.active_process && this.active_process.processes.length == 0) {
-                this.wrapper.find('.active-version-class').html('');
-            }
+            let selected_version = this.select_field.get_value();
+            let cls = '.active-version-class';
+            if(selected_version) {
+                cls = '#select_field';
+            } else {
+                if(this.active_process && this.active_process.processes.length == 0) {
+                    this.wrapper.find('.active-version-class').html('');
+                }
+            }            
             let row = this.section_fields(null, 'devit_customization.utils.insert_process_step', 'add');
             let row_html = $(`<tr class="add-row"></tr>`);
             row_html.append(row);
-            this.wrapper.find('.active-version-class').prepend(row_html);
+            this.wrapper.find(cls).prepend(row_html);
         })
     }
     section_fields(values, url, type) {
