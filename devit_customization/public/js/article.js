@@ -1173,19 +1173,20 @@ var recipe = class ArticleRecipe {
         }
     }
     setup_add_recipe_item() {
-//        let selected_version = $("[data-fieldname='select_version'")[1].value;
-//        let selected_version = $("[data-fieldname='active_version'")[1].value;
-//        console.log("\n========Selected Version this", this);
-//        console.log("\n========Selected Version this", this.$activeVersion[0].innerHTML);
         this.wrapper.find('.add-recipe-item').click(() => {
-            if(this.active_recipe && this.active_recipe.items && this.active_recipe.items.length == 0) {
-                this.wrapper.find('.active-version-class').html('');
+            let selected_version = this.select_field.get_value();
+            let cls = '.active-version-class';
+            if(selected_version) {
+                cls = '#select_version'
+            } else {
+                if(this.active_recipe && this.active_recipe.items && this.active_recipe.items.length == 0) {
+                    this.wrapper.find('.active-version-class').html('');
+                }
             }
             let row = this.section_fields(null, 'devit_customization.utils.insert_recipe_item', 'add');
             let row_html = $(`<tr class="add-row"></tr>`);
             row_html.append(row);
-            this.wrapper.find('.active-version-class').prepend(row_html);
-//            this.wrapper.find('.select_version').prepend(row_html);
+            this.wrapper.find(cls).prepend(row_html);
         })
     }
 
