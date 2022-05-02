@@ -1,0 +1,56 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Translation Term</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Translations\",\"col\":4}}]",
+ "creation": "2022-04-15 11:59:04.192761",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "idx": 0,
+ "label": "Translation Term",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Translations",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Translation Terms",
+   "link_count": 0,
+   "link_to": "Translation Terms",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tooltips",
+   "link_count": 0,
+   "link_to": "Tooltips",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2022-04-26 18:59:09.372031",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Translation Term",
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 32.0,
+ "shortcuts": [],
+ "title": "Translation Term"
+}

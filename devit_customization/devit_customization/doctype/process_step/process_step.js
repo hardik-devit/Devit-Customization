@@ -2,7 +2,15 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Process Step', {
-	// refresh: function(frm) {
-
-	// }
+	refresh: function(frm) {
+        if(!frm.doc.id)
+            frm.trigger('set_mandatory_fields');
+	 },
+    set_mandatory_fields(frm) {
+        frm.call('get_unique_value_for_process_steps').then(res => {
+			if (res.message){
+		        frm.set_value("id", parseInt(res.message));
+			}
+		});
+    }
 });

@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:source_text",
+ "creation": "2022-04-08 12:31:45.371649",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "module_name",
+  "sub_module",
+  "source_text",
+  "mandatory",
+  "column_break_5",
+  "field_de_term",
+  "field_it_term",
+  "is_custom_field",
+  "field_ref",
+  "custom_field_ref"
+ ],
+ "fields": [
+  {
+   "fieldname": "module_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Module Name",
+   "options": "Module Def"
+  },
+  {
+   "fieldname": "sub_module",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sub Module",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "source_text",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Field EN Term",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "mandatory",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Mandatory"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "field_de_term",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Field DE Term"
+  },
+  {
+   "fieldname": "field_it_term",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Field IT Term"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_custom_field",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is Custom Field"
+  },
+  {
+   "fieldname": "field_ref",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Field Ref",
+   "options": "DocField"
+  },
+  {
+   "fieldname": "custom_field_ref",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Custom Field Ref",
+   "options": "Custom Field"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-29 16:32:11.897151",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Translation Terms",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "source_text",
+ "track_changes": 1
+}

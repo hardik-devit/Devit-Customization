@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-04-23 15:48:58.377622",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "priority",
+  "order_set_ref",
+  "order_set_id",
+  "order_set_name",
+  "column_break_5",
+  "valid_from",
+  "valid_to",
+  "status",
+  "can_be_ordered"
+ ],
+ "fields": [
+  {
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "order_set_ref",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Order Set Ref.",
+   "options": "Order Sets"
+  },
+  {
+   "fetch_from": "order_set_ref.order_set_id",
+   "fieldname": "order_set_id",
+   "fieldtype": "Data",
+   "label": "Order Set ID"
+  },
+  {
+   "fetch_from": "order_set_ref.order_set_name",
+   "fieldname": "order_set_name",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "Order Set Name"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "order_set_ref.valid_from",
+   "fieldname": "valid_from",
+   "fieldtype": "Date",
+   "label": "Valid From"
+  },
+  {
+   "fetch_from": "order_set_ref.valid_to",
+   "fieldname": "valid_to",
+   "fieldtype": "Date",
+   "label": "Valid To"
+  },
+  {
+   "fetch_from": "order_set_ref.status",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive"
+  },
+  {
+   "fieldname": "can_be_ordered",
+   "fieldtype": "Select",
+   "label": "Can be Ordered",
+   "options": "Yes\nNo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-29 11:33:32.332014",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Order Set Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

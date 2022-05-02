@@ -1,37 +1,59 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:article_version_german",
+ "autoname": "field:article_version_id",
  "creation": "2022-03-26 13:24:26.481043",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "article_version_id",
   "article_version_german",
   "article_version_italian",
-  "article_version_english"
+  "article_version_english",
+  "article_group",
+  "recipe_item_code"
  ],
  "fields": [
   {
-   "fieldname": "article_version_german",
+   "fieldname": "article_group",
+   "fieldtype": "Link",
+   "label": "Group Name",
+   "options": "Group List"
+  },
+  {
+   "fieldname": "article_version_id",
    "fieldtype": "Data",
-   "label": "Article Version German",
+   "in_list_view": 1,
+   "label": "id",
+   "read_only": 1,
    "unique": 1
   },
   {
    "fieldname": "article_version_italian",
    "fieldtype": "Data",
-   "label": "Article Version Italian"
+   "label": "Article Version italian"
   },
   {
    "fieldname": "article_version_english",
    "fieldtype": "Data",
    "label": "Article Version English"
+  },
+  {
+   "fieldname": "article_version_german",
+   "fieldtype": "Data",
+   "label": "Article Version German"
+  },
+  {
+   "fieldname": "recipe_item_code",
+   "fieldtype": "Data",
+   "label": "Recipe Item Code",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-28 13:17:44.039992",
+ "modified": "2022-04-12 07:30:31.955311",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Article Version",

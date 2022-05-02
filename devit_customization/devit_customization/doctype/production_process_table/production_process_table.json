@@ -12,7 +12,10 @@
   "temperature",
   "time_in_min",
   "humidity_in_",
-  "oven_program"
+  "oven_program",
+  "slices_per_unit",
+  "slices_per_package",
+  "grams_per_package"
  ],
  "fields": [
   {
@@ -58,11 +61,27 @@
    "in_list_view": 1,
    "label": "Oven program",
    "options": "Oven Program"
+  },
+  {
+   "fieldname": "slices_per_unit",
+   "fieldtype": "Int",
+   "label": "Slices per unit"
+  },
+  {
+   "fieldname": "slices_per_package",
+   "fieldtype": "Int",
+   "label": "Slices per Package"
+  },
+  {
+   "fieldname": "grams_per_package",
+   "fieldtype": "Float",
+   "label": "Grams per Package"
   }
  ],
+ "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-03-30 16:22:03.368333",
+ "modified": "2022-04-11 16:08:28.106354",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Production Process Table",

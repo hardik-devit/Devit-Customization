@@ -1,0 +1,11 @@
+thead {
+  position: sticky;  
+  top: 4rem;
+  z-index: 1;
+  background-color: var(--bg-light-gray); 
+}
+
+
+
+
+

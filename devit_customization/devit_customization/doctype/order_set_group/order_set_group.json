@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{name1}",
+ "creation": "2022-04-20 10:21:38.476510",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "order_set_settings_tab",
+  "name1",
+  "column_break_3",
+  "valid_from",
+  "column_break_5",
+  "valid_to",
+  "state",
+  "order_set_tab",
+  "refresh_button",
+  "order_sets"
+ ],
+ "fields": [
+  {
+   "fieldname": "order_set_settings_tab",
+   "fieldtype": "Tab Break",
+   "label": "Order Set Settings"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "State",
+   "options": "Active\nInactive"
+  },
+  {
+   "fieldname": "valid_from",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Valid From"
+  },
+  {
+   "fieldname": "valid_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Valid To"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_set_tab",
+   "fieldtype": "Tab Break",
+   "label": "Order Set"
+  },
+  {
+   "fieldname": "order_sets",
+   "fieldtype": "Table",
+   "label": "Order Sets",
+   "options": "Order Set Table"
+  },
+  {
+   "fieldname": "refresh_button",
+   "fieldtype": "Button",
+   "label": "Refresh"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-29 11:24:53.302254",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Order Set Group",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

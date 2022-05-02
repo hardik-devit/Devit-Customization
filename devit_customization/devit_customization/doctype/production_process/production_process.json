@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{item_code}-{version}",
+ "creation": "2022-04-11 16:16:02.130509",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "version",
+  "base_version",
+  "allow_item_edit",
+  "section_break_5",
+  "processes"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "version",
+   "fieldtype": "Link",
+   "label": "Version",
+   "options": "Process Version"
+  },
+  {
+   "fieldname": "base_version",
+   "fieldtype": "Link",
+   "label": "Base Version",
+   "options": "Process Version"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_item_edit",
+   "fieldtype": "Check",
+   "label": "Allow Item Edit"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "processes",
+   "fieldtype": "Table",
+   "label": "Processes",
+   "options": "Production Process Table"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-11 16:16:30.037097",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Production Process",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

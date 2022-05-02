@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-04-22 11:51:32.728401",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "article_ref",
+  "article_name",
+  "article_id",
+  "article_cwg",
+  "column_break_5",
+  "article_type",
+  "article_group",
+  "can_be_ordered"
+ ],
+ "fields": [
+  {
+   "fieldname": "article_ref",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article Ref",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "article_ref.article_name_german",
+   "fieldname": "article_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article Name"
+  },
+  {
+   "fetch_from": "article_ref.item_code",
+   "fieldname": "article_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article ID"
+  },
+  {
+   "fetch_from": "article_ref.cwg1",
+   "fieldname": "article_cwg",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article CWG"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "article_ref.article_type",
+   "fieldname": "article_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article Type",
+   "options": "Article Type"
+  },
+  {
+   "fetch_from": "article_ref.item_group",
+   "fieldname": "article_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Article Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "can_be_ordered",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Can be Ordered",
+   "options": "Yes\nNo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-25 18:14:56.989065",
+ "modified_by": "Administrator",
+ "module": "Devit Customization",
+ "name": "Order Set Articles",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

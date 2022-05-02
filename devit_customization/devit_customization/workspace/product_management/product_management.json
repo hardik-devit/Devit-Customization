@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Access</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Article\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Article Type\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Unit Of Measure\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Group\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Discount Group\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Reports</b></span>\",\"col\":12}}]",
+ "content": "[{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Access</b></span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Article\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Article Type\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Unit Of Measure\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Group\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Discount Group\",\"col\":3}},{\"type\":\"spacer\",\"data\":{\"col\":12}},{\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Product Management</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Article\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Item Pricing\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Order Set\",\"col\":4}}]",
  "creation": "2022-03-21 18:12:44.504244",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -19,9 +19,93 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Article",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Article",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Article Type",
+   "link_count": 0,
+   "link_to": "Article Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Unit of Measure",
+   "link_count": 0,
+   "link_to": "UOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Pricing",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Discount Group",
+   "link_count": 0,
+   "link_to": "Discount Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Set",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Set Group",
+   "link_count": 0,
+   "link_to": "Order Set Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Set",
+   "link_count": 0,
+   "link_to": "Order Sets",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-03-23 11:33:14.162418",
+ "modified": "2022-04-22 11:57:07.164051",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Product Management",

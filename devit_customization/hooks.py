@@ -8,12 +8,12 @@ app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "hardik.zinzuvadiya@devitpl.com"
 app_license = "MIT"
-
+# app_include_css = "/assets/devit_customization/css/sticky_header.css"
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/devit_customization/css/devit_customization.css"
+app_include_css = ["/assets/devit_customization/css/sticky_header.css"]
 # app_include_js = "/assets/devit_customization/js/devit_customization.js"
 
 # include js, css files in header of web template
@@ -87,7 +87,7 @@ app_license = "MIT"
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
-#
+# 
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
@@ -113,8 +113,7 @@ override_doctype_class = {
 # }
 doctype_js = {
 	"Role" : "public/js/role.js",
-	"Item": "public/js/article.js",
-	"Production Process Table": "public/js/article.js"
+	"Item": ["public/js/article.js", "public/js/production_process.js"],
 }
 
 # will be executed after successfully installing this app
@@ -123,6 +122,8 @@ after_install = "devit_customization.install.after_install"
 doc_events = {
 	"Item": {
 		"validate": "devit_customization.utils.validate_item",
+		# "on_cancel": "method",
+		# "on_trash": "method"
 	}
 }
 

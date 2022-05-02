@@ -21,7 +21,7 @@ var roleMapping = class CustomRoleMapping {
         let html = $(`
             <div id="role-div">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead>                    
                         <tr>
                             <th></th>
                             <th>
@@ -48,7 +48,7 @@ var roleMapping = class CustomRoleMapping {
                     </tbody>
                 </table>
             </div>
-            <style>
+            <style>  
                 #role-div .table th, #role-div .table td {
                     padding: 8px 5px;
                 }

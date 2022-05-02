@@ -3,12 +3,15 @@ from erpnext.stock.doctype.item.item import (Item)
 from erpnext.controllers.item_variant import (make_variant_item_code)
 
 class ItemInherit(Item):
+    """
+    -> Please check this method is not working
+    """
     @frappe.whitelist()
     def get_unique_value_for_item_code(self):
         check_records = frappe.get_list('Item', filters=[["item_code", "=", self.item_code], ["item_code", "!=", None]])
         if not self.item_code and not check_records:
             check_records = frappe.get_list('Item', fields=['item_code'])
-            count_records = [d['item_code'] for d in check_records]
+            count_records = [int(d['item_code']) for d in check_records]
             return int(max(count_records or [0])) +1
 
     def autoname(self):

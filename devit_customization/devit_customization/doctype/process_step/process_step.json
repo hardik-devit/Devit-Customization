@@ -2,20 +2,39 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:process_step_german",
- "creation": "2022-03-30 14:52:32.059911",
+ "creation": "2022-04-11 16:17:55.349268",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "id",
   "process_step_german",
   "process_step_italian",
-  "process_step_english"
+  "process_step_english",
+  "section_break_5",
+  "temperature",
+  "time_in_min",
+  "humidity_in_",
+  "column_break_10",
+  "oven_program",
+  "slices_per_unit",
+  "slices_per_package",
+  "grams_per_package"
  ],
  "fields": [
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Id",
+   "read_only": 1,
+   "unique": 1
+  },
   {
    "fieldname": "process_step_german",
    "fieldtype": "Data",
    "label": "Process Step German",
+   "reqd": 1,
    "unique": 1
   },
   {
@@ -26,13 +45,62 @@
   {
    "fieldname": "process_step_english",
    "fieldtype": "Data",
-   "label": "Process Step English",
-   "unique": 1
+   "label": "Process Step English"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "temperature",
+   "fieldtype": "Check",
+   "label": "Temperature"
+  },
+  {
+   "default": "0",
+   "fieldname": "time_in_min",
+   "fieldtype": "Check",
+   "label": "Time in min"
+  },
+  {
+   "default": "0",
+   "fieldname": "humidity_in_",
+   "fieldtype": "Check",
+   "label": "Humidity in %"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "oven_program",
+   "fieldtype": "Check",
+   "label": "Oven program"
+  },
+  {
+   "default": "0",
+   "fieldname": "slices_per_unit",
+   "fieldtype": "Check",
+   "label": "Slices per unit"
+  },
+  {
+   "default": "0",
+   "fieldname": "slices_per_package",
+   "fieldtype": "Check",
+   "label": "Slices per Package"
+  },
+  {
+   "default": "0",
+   "fieldname": "grams_per_package",
+   "fieldtype": "Check",
+   "label": "Grams per Package"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-30 14:55:20.825127",
+ "modified": "2022-04-21 09:59:37.492996",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Process Step",
@@ -52,7 +120,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

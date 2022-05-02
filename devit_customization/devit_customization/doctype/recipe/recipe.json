@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:{item_code}-{version}",
+ "autoname": "field:version",
  "creation": "2022-03-28 22:33:24.141756",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -9,9 +9,12 @@
   "item_code",
   "version",
   "base_version",
+  "recipe_group",
   "allow_item_edit",
   "section_break_3",
-  "items"
+  "items",
+  "calculation_based_on",
+  "total_amount"
  ],
  "fields": [
   {
@@ -20,7 +23,8 @@
    "in_list_view": 1,
    "label": "Version",
    "options": "Article Version",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "section_break_3",
@@ -53,11 +57,28 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Allow Item Edit"
+  },
+  {
+   "fieldname": "recipe_group",
+   "fieldtype": "Link",
+   "label": "Group",
+   "options": "Group List"
+  },
+  {
+   "fieldname": "calculation_based_on",
+   "fieldtype": "Select",
+   "label": "Calculation Based On",
+   "options": "\nAmount In Grams\nPercentage"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Int",
+   "label": "Total Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-30 03:31:40.888318",
+ "modified": "2022-04-11 16:51:34.222115",
  "modified_by": "Administrator",
  "module": "Devit Customization",
  "name": "Recipe",
